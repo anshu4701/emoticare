@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>📊 Your Mood & Sentiment Progress</h2>
+
+<canvas id="moodChart" width="400" height="200"></canvas>
+<canvas id="sentimentChart" width="400" height="200" style="margin-top: 50px;"></canvas>
+
+<script>
+    const moodData = {{ mood_counts|tojson }};
+    const moodLabels = Object.keys(moodData);
+    const moodValues = Object.values(moodData);
+
+    const moodChart = new Chart(document.getElementById('moodChart'), {
+        type: 'bar',
+        data: {
+            labels: moodLabels,
+            datasets: [{
+                label: 'Mood Frequency',
+                data: moodValues,
+                backgroundColor: 'rgba(75, 192, 192, 0.6)'
+            }]
+        }
+    });
+
+    const sentimentDates = {{ dates|tojson }};
+    const sentimentLabels = {{ sentiments|tojson }};
+
+    // Convert sentiment strings to numbers
+    const sentimentMap = { "Positive": 1, "Neutral": 0, "Negative": -1 };
+    const sentimentScores = sentimentLabels.map(sent => sentimentMap[sent]);
+
+    const sentimentColors = sentimentLabels.map(sent => {
+    if (sent === "Positive") return "#66bb6a";  // green
+    if (sent === "Neutral") return "#ffee58";   // yellow
+    if (sent === "Negative") return "#ef5350";  // red
+    return "#90a4ae";  // default grey
+});
+
+    const sentimentChart = new Chart(document.getElementById('sentimentChart'), {
+        type: 'line',
+        data: {
+            labels: sentimentDates,
+            datasets: [{
+                label: 'Sentiment Over Time',
+                data: sentimentScores,
+                fill: false,
+                pointBackgroundColor: sentimentColors,
+                pointBorderColor: sentimentColors,
+                borderColor: "#4dd0e1",
+                tension: 0.3,
+                pointRadius: 6,
+                pointHoverRadius: 8
+            }]
+        },
+        options: {
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        label: function(ctx) {
+                            return `Sentiment: ${sentimentLabels[ctx.dataIndex]}`;
+                        }
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    ticks: {
+                        callback: value => {
+                            if (value === 1) return '😊 Positive';
+                            if (value === 0) return '😐 Neutral';
+                            if (value === -1) return '☹️ Negative';
+                            return value;
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+</script>
+{% endblock %}

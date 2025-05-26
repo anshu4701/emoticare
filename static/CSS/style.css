@@ -1,0 +1,372 @@
+/* ====== Google Fonts ====== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+/* ====== Reset & Base ====== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #f0f4ff, #fdf2f8);
+    color: #333;
+    line-height: 1.6;
+    min-height: 100vh;
+    padding-bottom: 50px;
+}
+
+/* ====== Header ====== */
+header {
+    background: #ffffffcc;
+    backdrop-filter: blur(8px);
+    padding: 1.5rem 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+header h1 {
+    font-size: 1.8rem;
+    color: #4db6ac;
+}
+
+header a {
+    color: #00796b;
+    text-decoration: none;
+    font-weight: 500;
+    margin-left: 1rem;
+}
+
+header a:hover {
+    text-decoration: underline;
+}
+
+/* ====== Main Layout ====== */
+main {
+    padding: 2rem;
+    max-width: 900px;
+    margin: auto;
+}
+
+/* ====== Forms ====== */
+form {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+    margin-top: 1.5rem;
+}
+
+label {
+    display: block;
+    margin: 0.8rem 0 0.3rem;
+    font-weight: 500;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+select,
+textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    resize: vertical;
+}
+
+textarea {
+    min-height: 100px;
+}
+
+button {
+    background-color: #4db6ac;
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background-color: #00796b;
+}
+
+/* ====== Dashboard Links ====== */
+.dashboard-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.dashboard-links a {
+    flex: 1 1 30%;
+    background: #ffffffee;
+    padding: 1.5rem;
+    border-radius: 15px;
+    text-align: center;
+    text-decoration: none;
+    color: #333;
+    font-weight: 600;
+    box-shadow: 0 6px 10px rgba(0,0,0,0.04);
+    transition: transform 0.2s ease, background 0.3s;
+}
+
+.dashboard-links a:hover {
+    background: #c8e6c9;
+    transform: translateY(-5px);
+}
+
+/* ====== Chart Containers ====== */
+canvas {
+    max-width: 100%;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 1rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+/* ====== Journal Page ====== */
+textarea[name="entry"] {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    background: #fffdfc;
+}
+
+/* ====== Mood Emoji Button Group (if implemented) ====== */
+.mood-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.mood-buttons button {
+    font-size: 1.5rem;
+    padding: 0.8rem 1.2rem;
+    border: 2px solid transparent;
+    background: #f0f0f0;
+    border-radius: 12px;
+    transition: 0.3s;
+}
+
+.mood-buttons button:hover,
+.mood-buttons button.selected {
+    background: #d0f0e0;
+    border-color: #4db6ac;
+}
+
+/* ====== Responsive Design ====== */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .dashboard-links {
+        flex-direction: column;
+    }
+
+    form {
+        padding: 1.5rem;
+    }
+
+    button {
+        width: 100%;
+    }
+}
+
+/* ====== Footer (optional) ====== */
+footer {
+    text-align: center;
+    padding: 1rem;
+    font-size: 0.9rem;
+    color: #888;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    background: #ffffffcc;
+    backdrop-filter: blur(8px);
+}
+
+/* Mood Colors */
+.mood-buttons button.happy {
+    background-color: #fff9c4;
+    border-color: #fbc02d;
+    color: #795548; /* Dark brown */
+}
+
+.mood-buttons button.sad {
+    background-color: #e3f2fd;
+    border-color: #1976d2;
+    color: #0d47a1;
+}
+
+.mood-buttons button.angry {
+    background-color: #ffebee;
+    border-color: #d32f2f;
+    color: #b71c1c;
+}
+
+.mood-buttons button.anxious {
+    background-color: #eceff1;
+    border-color: #607d8b;
+    color: #37474f;
+}
+
+.mood-buttons button.excited {
+    background-color: #e8f5e9;
+    border-color: #388e3c;
+    color: #1b5e20;
+}
+
+
+/* Selected override */
+.mood-buttons button.selected {
+    transform: scale(1.05);
+    box-shadow: 0 0 8px rgba(0,0,0,0.1);
+}
+
+.mood-buttons button {
+    font-weight: 600; /* Make text bolder */
+}
+
+.mood-buttons button {
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.7);
+}
+
+/* Make logo look like normal text */
+.logo-link {
+    text-decoration: none;
+    color: #4db6ac;
+    transition: color 0.3s ease;
+}
+
+.logo-link:hover {
+    color: #00796b;
+}
+
+/* Dashboard Quick Links */
+.dashboard-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.dashboard-links a {
+    flex: 1 1 30%;
+    background: #ffffffee;
+    padding: 1.5rem;
+    border-radius: 15px;
+    text-align: center;
+    text-decoration: none;
+    color: #333;
+    font-weight: 600;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.05);
+    transition: transform 0.2s ease, background 0.3s;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.dashboard-links a:hover {
+    background: #c8e6c9;
+    transform: translateY(-5px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .dashboard-links {
+        flex-direction: column;
+    }
+    .dashboard-links a {
+        width: 100%;
+    }
+}
+
+/* Fullscreen Background Video */
+#bgVideo {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -1;
+    object-fit: cover;
+    opacity: 0.8; /* Control how visible it is */
+}
+
+/* Optional: Dark overlay to enhance text readability */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.7); /* You can use rgba(0,0,0,0.3) for darker feel */
+    z-index: -1;
+}
+
+@media (max-width: 768px) {
+    #bgVideo {
+        display: none;
+    }
+}
+
+/* Daily Quote Styling */
+.daily-quote {
+    margin-top: 2rem;
+    padding: 1rem 2rem;
+    background: rgba(255, 255, 255, 0.8);
+    border-left: 4px solid #4db6ac;
+    font-size: 1.1rem;
+    font-style: italic;
+    color: #333;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    max-width: 600px;
+}
+
+.daily-quote {
+    margin-top: 2rem;
+    padding: 1.2rem 1.5rem;
+    background: rgba(255, 255, 255, 0.85);
+    border-left: 4px solid #4db6ac;
+    font-size: 1.1rem;
+    font-style: italic;
+    color: #333;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    max-width: 600px;
+}
+
+.mood-suggestion {
+    margin-top: 1rem;
+    background: #f0f4c3;
+    color: #333;
+    padding: 1rem;
+    border-left: 4px solid #c0ca33;
+    border-radius: 10px;
+    font-weight: 500;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+.mood-suggestion.hidden {
+    display: none;
+}
+
+.flash.error {
+    color: red;
+    margin-bottom: 1rem;
+}

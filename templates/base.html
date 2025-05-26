@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>EmotiCare</title>
+    <link rel="stylesheet" href="../static/CSS/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Background Video -->
+    <video autoplay muted loop id="bgVideo">
+        <source src="{{ url_for('static', filename='videos/sea-waves.webm') }}" type="video/webm">
+        Your browser does not support HTML5 video.
+    </video>
+
+    <header>
+        <h1><a href="{{ url_for('dashboard') }}" class="logo-link">EmotiCare</a></h1>
+        {% if session.get('user_id') %}
+            <p>Welcome, {{ session['name'] }} | <a href="{{ url_for('logout') }}">Logout</a></p>
+        {% endif %}
+    </header>
+    
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const quotes = [
+                "“Taking time to care for yourself is never wasted.”",
+                "“Your mental health is a priority. Your happiness is essential.”",
+                "“Healing takes time, and that’s okay.”",
+                "“Breathe. You’re doing better than you think.”",
+                "“You are enough. You always were.”",
+                "“Progress, not perfection.”"
+            ];
+            const quote = quotes[Math.floor(Math.random() * quotes.length)];
+            const quoteEl = document.getElementById("dailyQuote");
+            if (quoteEl) {
+                quoteEl.innerHTML = `<em>${quote}</em>`;
+            }
+        });
+    </script>
+
+
+</body>
+</html>

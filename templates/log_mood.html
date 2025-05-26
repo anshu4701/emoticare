@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>Log Your Mood</h2>
+
+<form method="POST" id="moodForm">
+    <label>Select Mood:</label><br>
+    <div class="mood-buttons">
+        <button type="button" data-mood="Happy" class="happy">😊 Happy</button>
+        <button type="button" data-mood="Sad" class="sad">😢 Sad</button>
+        <button type="button" data-mood="Angry" class="angry">😠 Angry</button>
+        <button type="button" data-mood="Anxious" class="anxious">😰 Anxious</button>
+        <button type="button" data-mood="Excited" class="excited">😄 Excited</button>
+    </div>
+
+    <!-- Hidden field to store mood choice -->
+    <input type="hidden" name="mood" id="selectedMood" required><br><br>
+
+    <label>Tags (optional):</label><br>
+    <input type="text" name="tags" placeholder="e.g., exams, work, family"><br><br>
+
+    <button type="submit">Submit</button>
+    <div id="moodSuggestion" class="mood-suggestion hidden"></div>
+</form>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const moodButtons = document.querySelectorAll(".mood-buttons button");
+    const hiddenInput = document.getElementById("selectedMood");
+
+    moodButtons.forEach(btn => {
+        btn.addEventListener("click", () => {
+            moodButtons.forEach(b => b.classList.remove("selected"));
+            btn.classList.add("selected");
+            hiddenInput.value = btn.dataset.mood;
+        });
+    });
+
+    document.getElementById("moodForm").addEventListener("submit", (e) => {
+        if (!hiddenInput.value) {
+            alert("Please select a mood before submitting.");
+            e.preventDefault();
+        }
+    });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+    const moodButtons = document.querySelectorAll(".mood-buttons button");
+    const hiddenInput = document.getElementById("selectedMood");
+    const suggestionBox = document.getElementById("moodSuggestion");
+
+    const moodTips = {
+        Happy: "😊 Stay in the moment and spread the joy!",
+        Sad: "💙 Try journaling or listening to calming music.",
+        Angry: "😠 Take a deep breath and step outside for fresh air.",
+        Anxious: "😰 Practice deep breathing or a short meditation.",
+        Excited: "😄 Capture your thoughts in a journal or share with a friend!"
+    };
+
+    moodButtons.forEach(btn => {
+        btn.addEventListener("click", () => {
+            moodButtons.forEach(b => b.classList.remove("selected"));
+            btn.classList.add("selected");
+            hiddenInput.value = btn.dataset.mood;
+
+            // Show suggestion
+            const mood = btn.dataset.mood;
+            suggestionBox.classList.remove("hidden");
+            suggestionBox.innerText = moodTips[mood] || "You're doing great!";
+        });
+    });
+});
+
+</script>
+
+{% endblock %}
