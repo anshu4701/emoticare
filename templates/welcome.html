@@ -30,16 +30,17 @@
             animation: pulse 2s infinite;
         }
 
-        .loader {
+        .logo-img {
+            width: 100px;
             margin-top: 2rem;
-            border: 6px solid #e0f2f1;
-            border-top: 6px solid #4db6ac;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            animation: spin 1s linear infinite;
-            display: inline-block;
+            animation: pulseLogo 2s infinite;
         }
+        
+        @keyframes pulseLogo {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.9; }
+        }
+
 
         body::before {
             content: "";
@@ -87,17 +88,18 @@
             100% { transform: rotate(360deg); }
         }
 
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
+
     </style>
 </head>
 <body>
     
     <div class="welcome-container">
         <div class="logo-text">EmotiCare</div>
-        <div class="loader"></div>
+        <img src="{{ url_for('static', filename='Images/logo.png') }}" alt="EmotiCare Logo" class="logo-img">
         <div class="btn-group">
             <a href="{{ url_for('login') }}" class="action-btn">Login</a>
             <a href="{{ url_for('register') }}" class="action-btn">Register</a>
